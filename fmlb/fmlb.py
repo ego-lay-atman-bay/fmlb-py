@@ -8,9 +8,9 @@ from .file_utils import PathOrBinaryFile, open_binary
 @dcs.dataclass()
 class Header:
     magic: Annotated[bytes, 4] = b'_FML'
-    version_major: dcs.U32 = 0 # ?
-    version_minor: dcs.U32 = 8 # ?
-    version_patch: dcs.U32 = 3 # ?
+    unknown1: dcs.U32 = 0 # ?
+    version: dcs.U32 = 8 # ?
+    unkown2: dcs.U32 = 3 # ?
     num_files: dcs.U32 = 0
     data_offset: dcs.U32 = 0
     ender: Annotated[dcs.U32, dcs.PadAfter(16)] = 0
