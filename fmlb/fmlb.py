@@ -11,8 +11,8 @@ from .file_utils import PathOrBinaryFile, open_binary
 class FMLB:
     def __init__(self, file: PathOrBinaryFile | None = None):
         self.header = Header()
-        self.file_metadata: list[FileMetadata] = []
-        self.files = []
+        self.data_metadata: list[FileMetadata] = []
+        self.data = []
 
         if file is not None:
             self.read(file)
@@ -20,10 +20,10 @@ class FMLB:
     def read(self, file: PathOrBinaryFile):
         with open_binary(file) as file:
             self.header = self._read_header(file)
-            self.file_metadata = self._read_file_list(file)
+            self.data_metadata = self._read_data_list(file)
             
-            for metadata in self.file_metadata:
-                self.files.append(self._read_file(metadata, file))
+            for metadata in self.data_metadata:
+                self.data.append(self._read_data(metadata, file))
 
     
     def _read_header(self, file: BinaryIO) -> Header:
@@ -32,7 +32,7 @@ class FMLB:
             file.read(dcs.get_struct_size(Header))
         )
     
-    def _read_file_list(self, file: BinaryIO):
+    def _read_data_list(self, file: BinaryIO):
         metadatas = []
         
         for x in range(self.header.num_files):
@@ -44,25 +44,25 @@ class FMLB:
         
         return metadatas
     
-    def _read_file(self, file_metadata: FileMetadata, file: BinaryIO):
+    def _read_data(self, file_metadata: FileMetadata, file: BinaryIO):
         match file_metadata.type:
-            case enums.FileType.hier:
+            case enums.DataType.hier:
                 pass
-            case enums.FileType.txload:
+            case enums.DataType.txload:
                 pass
-            case enums.FileType.MATERIAL:
+            case enums.DataType.MATERIAL:
                 pass
-            case enums.FileType.GEOMETRY:
+            case enums.DataType.GEOMETRY:
                 pass
-            case enums.FileType.PRIMITIVE:
+            case enums.DataType.PRIMITIVE:
                 pass
-            case enums.FileType.CLIP:
+            case enums.DataType.CLIP:
                 pass
-            case enums.FileType.aniplug:
+            case enums.DataType.aniplug:
                 pass
-            case enums.FileType.SOUND:
+            case enums.DataType.SOUND:
                 pass
-            case enums.FileType.SOUNDBANK:
+            case enums.DataType.SOUNDBANK:
                 pass
-            case enums.FileType.COLORSET:
+            case enums.DataType.COLORSET:
                 pass

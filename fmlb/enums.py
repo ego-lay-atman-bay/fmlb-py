@@ -1,6 +1,6 @@
 from enum import IntEnum
 
-class FileType(IntEnum):
+class DataType(IntEnum):
     hier = 102
     txload = 103
     MATERIAL = 104
