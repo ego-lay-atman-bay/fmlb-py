@@ -1,6 +1,6 @@
 # fmlb-py
-Read fmlb files from Loony Toons Run
+Read fmlb files from Loony Toons Dash
 
 # Credits
 
-Thanks to Disney chip for asking me to create this project, and giving me a file specification for the fmlb files.
+Thanks to [Disney chip](https://www.youtube.com/@disneychip02) for asking me to create this project, and giving me a file specification for the fmlb files.
