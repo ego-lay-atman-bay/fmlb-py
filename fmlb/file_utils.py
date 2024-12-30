@@ -45,3 +45,11 @@ def open_binary(file: PathOrBinaryFile) -> BinaryIO:
         raise TypeError('cannot open file')
     
     return context_manager
+
+def ascii_string(data: BinaryIO | bytes | bytearray, length: int = 64):
+    if is_binary_file(data):
+        data = data.read(length)
+    if not isinstance(data, (bytes, bytearray)):
+        raise TypeError('data must be bytes')
+    
+    return bytes(data[:length].split(b'\x00')[0])
