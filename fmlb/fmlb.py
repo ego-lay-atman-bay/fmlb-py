@@ -6,6 +6,7 @@ from fmlb.types import FileMetadata, Header
 
 from . import enums
 from .file_utils import PathOrBinaryFile, open_binary
+from . import data_types
 
 
 class FMLB:
@@ -44,10 +45,11 @@ class FMLB:
         
         return metadatas
     
-    def _read_data(self, file_metadata: FileMetadata, file: BinaryIO):
-        match file_metadata.type:
+    def _read_data(self, data_metadata: FileMetadata, file: BinaryIO):
+        file.seek(self.header.data_offset + data_metadata.data_offset)
+        match data_metadata.type:
             case enums.DataType.hier:
-                pass
+                return data_types.hier(file.read(data_metadata.size))
             case enums.DataType.txload:
                 pass
             case enums.DataType.MATERIAL:

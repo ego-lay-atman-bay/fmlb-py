@@ -4,6 +4,20 @@ import dataclasses_struct as dcs
 
 
 @dcs.dataclass()
+class Vector3Float32:
+    x: dcs.F32
+    y: dcs.F32
+    z: dcs.F32
+
+@dcs.dataclass()
+class Vector4Float32:
+    x: dcs.F32
+    y: dcs.F32
+    z: dcs.F32
+    w: dcs.F32
+
+
+@dcs.dataclass()
 class Header:
     magic: Annotated[bytes, 4] = b'_FML'
     unknown1: dcs.U32 = 0 # ?
